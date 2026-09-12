@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
-:root {
+@theme inline {
+  --frame-height: --spacing(16);
+  --frame-width: --spacing(28.5);
+  --font-sans-display: var(--font-bebas-nue);
+  --font-sans: var(--font-inter-sans);
+  --projects-section-height: --spacing(23);
+  --project-gap-top: --spacing(35);
+  --project-height: calc(100dvh - var(--frame-height) - (var(--projects-section-height) + var(--project-gap-top)))
+}
+
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +33,4 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */

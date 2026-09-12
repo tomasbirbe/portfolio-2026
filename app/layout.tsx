@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Inter } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
+
+const bebasNeue = localFont({
+  src: "../public/bebas_neue.ttf",
+  display: "swap",
+  variable: "--font-bebas-nue",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const interSans = Inter({
+  variable: "--font-inter-sans",
   subsets: ["latin"],
 });
 
@@ -21,9 +28,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${interSans.variable} ${bebasNeue.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="h-screen px-(--frame-width) isolate py-(--frame-height) relative">
+        {children}
+        <div className="bg-neutral-200 w-px absolute left-(--frame-width) top-0 bottom-0"></div>
+        <div className="bg-neutral-200 w-px absolute right-(--frame-width) top-0 bottom-0"></div>
+        <div className="bg-neutral-200 h-px absolute left-0 right-0 top-(--frame-height)"></div>
+        <div className="bg-neutral-200 h-px absolute left-0 right-0 bottom-(--frame-height)"></div>
+      </body>
     </html>
   );
 }
