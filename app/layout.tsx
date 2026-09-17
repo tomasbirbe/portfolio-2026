@@ -30,12 +30,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${interSans.variable} ${bebasNeue.variable} h-full antialiased`}
     >
-      <body className="h-screen px-(--frame-width) isolate py-(--frame-height) relative">
-        {children}
-        <div className="bg-neutral-200 w-px absolute left-(--frame-width) top-0 bottom-0"></div>
+      <body className="h-screen overflow-hidden">
+        <div className="h-full relative isolate ">
+          {children}
+        </div>
+
+
+        <div className="bg-white w-(--frame-width) absolute left-0 top-0 bottom-0"></div>
+        <div className="bg-white w-(--frame-width) absolute right-0 top-0 bottom-0"></div>
+        <div className="bg-white h-(--frame-width) absolute left-0 top-0 right-0"></div>
+        <div className="bg-white h-(--frame-width) absolute left-0 bottom-0 right-0"></div>
+        {/* <div className="bg-neutral-200 w-px absolute left-(--frame-width) top-0 bottom-0"></div>
         <div className="bg-neutral-200 w-px absolute right-(--frame-width) top-0 bottom-0"></div>
         <div className="bg-neutral-200 h-px absolute left-0 right-0 top-(--frame-height)"></div>
-        <div className="bg-neutral-200 h-px absolute left-0 right-0 bottom-(--frame-height)"></div>
+        <div className="bg-neutral-200 h-px absolute left-0 right-0 bottom-(--frame-height)"></div> */}
       </body>
     </html>
   );

@@ -2,14 +2,39 @@ import { ArrowSquareOutIcon } from "@phosphor-icons/react/dist/ssr/ArrowSquareOu
 import { EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr/EnvelopeSimple";
 import { GithubLogoIcon } from "@phosphor-icons/react/dist/ssr/GithubLogo";
 import { LinkedinLogoIcon } from "@phosphor-icons/react/dist/ssr/LinkedinLogo";
+import bgParams from './background.json'
 import Image from "next/image";
+import React from "react";
+
+function BackgroundElement(
+  props: { width: number, height: number, x: number, y: number }
+) {
+
+  return <div className="absolute" style={{
+    width: props.width,
+    height: props.height,
+    top: props.y,
+    left: props.x,
+  }}>
+    <Image src="/background.png" style={{
+
+      width: 1920,
+      height: 1080,
+      objectPosition: `-${props.x}px -${props.y}px`
+    }} className="object-cover" {...props} alt="" />
+  </div>
+}
 
 export function LandingPage() {
   return (
-    <div className="grid grid-cols-[min-content_min-content_min-content)] auto-rows-min shrink-0 gap-4 items-end">
+    // <div className="">
+    <div>
+      <BackgroundElement {...bgParams.landing} />
+      <BackgroundElement {...bgParams.calendar} />
+
       {/* Izquierda */}
-      <div className="flex flex-col col-start-1 row-start-3 -row-end-1 justify-start items-start">
-        <Image
+      {/* <div className="flex flex-col col-start-1 row-start-3 -row-end-1 justify-start mx-auto items-start"> */}
+      {/* <Image
           src="/wireframes/landing.jpg"
           width={500}
           height={412}
@@ -18,13 +43,13 @@ export function LandingPage() {
           preload
         />
         <h1 className="text-9xl font-sans-display row-start-2 col-start-1">
-          <div>Frontend</div>
+          <div>Frontend</div> 
           <div>Developer</div>
         </h1>
-      </div>
+      </div> */}
 
       {/* Arriba derecha */}
-      <div className="flex col-start-2 row-start-1 gap-4 justify-start items-start">
+      {/* <div className="flex col-start-2 row-start-1 gap-4 justify-start items-start">
         <div className="flex flex-col gap-4 justify-start items-start">
           <Image
             src="/wireframes/select.jpg"
@@ -48,10 +73,10 @@ export function LandingPage() {
           aria-hidden
           alt=""
         />
-      </div>
+      </div> */}
 
       {/* Abajo derecha */}
-      <div className="flex gap-4 col-start-2 row-start-2 justify-start items-start self-start">
+      {/* <div className="flex gap-4 col-start-2 row-start-2 justify-start items-start self-start">
         <Image
           src="/wireframes/buttons.jpg"
           width={157}
@@ -82,32 +107,9 @@ export function LandingPage() {
           height={286}
           aria-hidden
           alt=""
-        />
-      </div>
+        />*/}
+      {/* </div> */}
     </div>
-  );
-}
-
-function CrossedLines() {
-  return (
-    <svg className="absolute -z-10 aspect-square h-full overflow-visible">
-      <line
-        x1="0"
-        y1="0"
-        x2="100%"
-        y2="100%"
-        className="stroke-neutral-200 stroke-1"
-        vectorEffect="non-scaling-stroke"
-      />
-      <line
-        x1="100%"
-        y1="0"
-        x2="0"
-        y2="100%"
-        className="stroke-neutral-200 stroke-1"
-        vectorEffect="non-scaling-stroke"
-      />
-    </svg>
   );
 }
 
@@ -169,6 +171,7 @@ function ProjectCard(props: {
   description: string;
   githubLink: string;
   demoLink: string;
+  note?: React.ReactNode
 }) {
   return (
     <div className="flex sticky top-(--project-gap-top) items-start justify-center w-[70%] max-h-250 h-(--project-height) border border-neutral-400 bg-white">
@@ -180,11 +183,12 @@ function ProjectCard(props: {
         aria-hidden
         alt=""
       />
-      <div className="flex flex-col py-4 justify-between h-full px-4">
+      <div className="flex flex-col w-1/2 py-4 justify-between h-full px-4">
         <div className="flex flex-col gap-4 justify-start">
           <h3 className="text-4xl font-sans-display">{props.title}</h3>
           <p>{props.description}</p>
         </div>
+        {props.note}
         <div className="flex justify-between w-full">
           <a
             className="hover:scale-110 transition-all"
@@ -195,7 +199,7 @@ function ProjectCard(props: {
             <Image src="/github-logo.svg" width={24} height={24} alt="GitHub" />
           </a>
           <a
-            className="flex group gap-1 text-sm items-center border border-neutral-800 px-3 py-2 hover:bg-neutral-200 active:bg-neutral-300 transition-colors"
+            className="flex gap-1 text-sm items-center border border-neutral-800 px-3 py-2 hover:bg-neutral-200 active:bg-neutral-300 transition-colors duration-300"
             href={props.demoLink}
             target="_blank"
             rel="noopener noreferrer"
@@ -203,7 +207,6 @@ function ProjectCard(props: {
             Go to demo
             <ArrowSquareOutIcon
               size={16}
-              className="group-hover:-translate-y-0.5 transition-all"
             />
           </a>
         </div>
@@ -219,7 +222,7 @@ function Projects() {
         <h2 className="font-sans-display text-6xl">Projects</h2>
       </div>
 
-      <div className="flex flex-col w-full items-center gap-80 p-8 min-h-0 justify-start bg-[#ffffff] bg-[linear-gradient(to_right,#c0c0c0_1px,transparent_1px),linear-gradient(to_bottom,#c0c0c0_1px,transparent_1px)] bg-size-[24px_24px] relative font-sans bg-position-[0px_12px]"
+      <div className="flex flex-col w-full items-center gap-80 p-8 min-h-0 justify-start bg-[#ffffff] bg-[linear-gradient(to_right,#d9d9d9_1px,transparent_1px),linear-gradient(to_bottom,#c0c0c0_1px,transparent_1px)] bg-size-[24px_24px] relative font-sans bg-position-[0px_12px]"
       >
         {/* TODO: Check width on bigger viewport */}
         <ProjectCard
@@ -227,7 +230,7 @@ function Projects() {
           imgWidth={1200}
           imgHeight={576}
           title="Blommy"
-          description="This project is my personal blog where I publish my learning, tools and resources. I could put in practice NextJS and ChakraUI with all its functionalities."
+          description="This project is my personal blog where I publish my learning, tools and resources."
           githubLink="https://github.com/blommy"
           demoLink="https://blommy.com"
         />
@@ -236,9 +239,10 @@ function Projects() {
           imgWidth={1364}
           imgHeight={632}
           title="County"
-          description="A finance app where you can register your spends, income and savings"
+          description="A finance app where you can register your spends, incomes and savings"
           githubLink="https://github.com/blommy"
           demoLink="https://tb-county.vercel.app/"
+          note={<p className="italic text-sm">You can try it with <Bold>testdemo@gmail.com</Bold> as username and <Bold>testdemo</Bold> as password</p>}
         />
         <ProjectCard
           imgSrc="/meli-challenge.png"
@@ -264,9 +268,9 @@ function Contact() {
             <p className="text-pretty">I&apos;m always ready to listen to any proposal. If you think I can fit in any project you have in mind, don&apos;t hesitate to contact me.</p>
           </div>
           <div className="flex gap-4">
-            <a className="hover:scale-110 transition-transform" href="#"><EnvelopeSimpleIcon size={32} /></a>
-            <a className="hover:scale-110 transition-transform" href="#"><LinkedinLogoIcon size={32} /></a>
-            <a className="hover:scale-110 transition-transform" href="#"><GithubLogoIcon size={32} /></a>
+            <a className="hover:scale-110 transition-transform" href="mailto:tomas.birbe@gmail.com"><EnvelopeSimpleIcon size={32} /></a>
+            <a className="hover:scale-110 transition-transform" href="https://www.linkedin.com/in/tomas-birbe/"><LinkedinLogoIcon size={32} /></a>
+            <a className="hover:scale-110 transition-transform" href="https://github.com/tomasbirbe"><GithubLogoIcon size={32} /></a>
           </div>
         </div>
         <svg className="w-full h-full absolute inset-0 pointer-events-none z-10 overflow-visible">
@@ -292,8 +296,8 @@ function Contact() {
 export default function Page() {
   return (
     // TODO: test to remove overflow
-    <div className="overflow-auto h-full">
-      <div className="flex w-full border-b border-neutral-200 h-full overflow-hidden items-end min-h-0 justify-start bg-[#ffffff] bg-[radial-gradient(#c0c0c0_2px,transparent_2px)] bg-size-[16px_16px] relative font-sans">
+    <div className="overflow-auto h-full px-(--frame-width) relative py-(--frame-height) ">
+      <div className="flex w-full border-b border-neutral-200 h-full overflow-hidden items-end min-h-0 justify-start bg-[#ffffff] bg-[radial-gradient(#d9d9d9_1px,transparent_1px)] bg-size-[16px_16px] font-sans">
         <LandingPage />
       </div>
       <div className="flex isolate border-b border-neutral-200 w-full h-full min-h-0 relative">

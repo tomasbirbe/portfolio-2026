@@ -1,0 +1,14 @@
+{
+  "landing": {
+    "x": 16,
+    "y": 604,
+    "width": 500,
+    "height": 412
+  },
+  "calendar": {
+    "x": 560,
+    "y": 686,
+    "width": 204,
+    "height": 203
+  }
+}

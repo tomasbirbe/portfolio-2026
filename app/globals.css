@@ -1,13 +1,31 @@
 @import "tailwindcss";
 
 @theme inline {
-  --frame-height: --spacing(16);
-  --frame-width: --spacing(28.5);
+  --frame-height: --spacing(14);
+  --frame-width: --spacing(18);
   --font-sans-display: var(--font-bebas-nue);
   --font-sans: var(--font-inter-sans);
   --projects-section-height: --spacing(23);
   --project-gap-top: --spacing(35);
-  --project-height: calc(100dvh - var(--frame-height) - (var(--projects-section-height) + var(--project-gap-top)))
+  --project-height: calc(100dvh - var(--frame-height) - (var(--projects-section-height) + var(--project-gap-top)));
+
+  --foreground: var(--color-neutral-800);
+  --foreground-display: var(--color-black);
+
+
+  --animate-fade-in: fade-in ease-out;
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 100%;
+    }
+  }
+
+
 }
 
 /* :root {
@@ -28,9 +46,17 @@
     --foreground: #ededed;
   }
 }
+*/
+
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--foreground-display);
+}
