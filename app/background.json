@@ -7,8 +7,98 @@
   },
   "calendar": {
     "x": 560,
-    "y": 686,
+    "y": 737,
     "width": 204,
     "height": 203
+  },
+  "contextMenu": {
+    "x": 1151,
+    "y": 778,
+    "width": 141,
+    "height": 181
+  },
+  "chat": {
+    "x": 350,
+    "y": 336,
+    "width": 268,
+    "height": 245
+  },
+  "chart": {
+    "x": 1348,
+    "y": 793,
+    "width": 389,
+    "height": 385
+  },
+  "chips": {
+    "x": 1160,
+    "y": 714,
+    "width": 186,
+    "height": 39
+  },
+  "card": {
+    "x": 1379,
+    "y": 347,
+    "width": 340,
+    "height": 415
+  },
+  "radioButtons": {
+    "x": 1225,
+    "y": 99,
+    "width": 274,
+    "height": 225
+  },
+  "paginateButtons": {
+    "x": 1554,
+    "y": 247,
+    "width": 249,
+    "height": 59
+  },
+  "font": {
+    "x": 1586,
+    "y": 52,
+    "width": 176,
+    "height": 186
+  },
+  "alert": {
+    "x": 754,
+    "y": 184,
+    "width": 381,
+    "height": 160
+  },
+  "icons": {
+    "x": 764,
+    "y": 75,
+    "width": 268,
+    "height": 53
+  },
+  "buttons": {
+    "x": 534,
+    "y": 91,
+    "width": 157,
+    "height": 197
+  },
+  "select": {
+    "x": 128,
+    "y": 106,
+    "width": 280,
+    "height": 61
+  },
+  "skeleton": {
+    "x": 24,
+    "y": 204,
+    "width": 442,
+    "height": 108
+  },
+  "toggleAndPopover": {
+    "x": 823,
+    "y": 706,
+    "width": 255,
+    "height": 136
+  },
+  "breadcrumbs": {
+    "x": 834,
+    "y": 876,
+    "width": 237,
+    "height": 19
   }
 }

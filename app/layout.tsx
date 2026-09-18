@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Inter } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
+import { BackgroundElement } from "./page";
+import bgParams from './background.json'
 
 const bebasNeue = localFont({
   src: "../public/bebas_neue.ttf",
@@ -28,22 +30,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${interSans.variable} ${bebasNeue.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${interSans.variable} ${bebasNeue.variable} antialiased h-full`}
     >
-      <body className="h-screen overflow-hidden">
-        <div className="h-full relative isolate ">
+      <body className="relative h-screen py-(--frame-height) px-(--frame-width)">
+        <div className="overflow-auto h-full">
           {children}
         </div>
+        <div className="z-10 bg-white w-(--frame-width) fixed left-0 top-0 bottom-0"></div>
+        <div className="z-10 bg-white w-(--frame-width) fixed right-0 top-0 bottom-0"></div>
+        <div className="z-10 bg-white h-(--frame-height) fixed left-0 top-0 right-0"></div>
+        <div className="z-10 bg-white h-(--frame-height) fixed left-0 bottom-0 right-0"></div>
+        <div className="z-10 bg-neutral-200 w-px fixed left-(--frame-width) top-0 bottom-0"></div>
+        <div className="z-10 bg-neutral-200 w-px fixed right-(--frame-width) top-0 bottom-0"></div>
+        <div className="z-10 bg-neutral-200 h-px fixed left-0 right-0 top-(--frame-height)"></div>
+        <div className="z-10 bg-neutral-200 h-px fixed left-0 right-0 bottom-(--frame-height)"></div>
+        {/* </div> */}
 
 
-        <div className="bg-white w-(--frame-width) absolute left-0 top-0 bottom-0"></div>
-        <div className="bg-white w-(--frame-width) absolute right-0 top-0 bottom-0"></div>
-        <div className="bg-white h-(--frame-width) absolute left-0 top-0 right-0"></div>
-        <div className="bg-white h-(--frame-width) absolute left-0 bottom-0 right-0"></div>
-        {/* <div className="bg-neutral-200 w-px absolute left-(--frame-width) top-0 bottom-0"></div>
-        <div className="bg-neutral-200 w-px absolute right-(--frame-width) top-0 bottom-0"></div>
-        <div className="bg-neutral-200 h-px absolute left-0 right-0 top-(--frame-height)"></div>
-        <div className="bg-neutral-200 h-px absolute left-0 right-0 bottom-(--frame-height)"></div> */}
+
       </body>
     </html>
   );

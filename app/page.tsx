@@ -2,113 +2,57 @@ import { ArrowSquareOutIcon } from "@phosphor-icons/react/dist/ssr/ArrowSquareOu
 import { EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr/EnvelopeSimple";
 import { GithubLogoIcon } from "@phosphor-icons/react/dist/ssr/GithubLogo";
 import { LinkedinLogoIcon } from "@phosphor-icons/react/dist/ssr/LinkedinLogo";
-import bgParams from './background.json'
+import bgParams from "./background.json";
 import Image from "next/image";
-import React from "react";
+import React, { ViewTransition } from "react";
 
-function BackgroundElement(
-  props: { width: number, height: number, x: number, y: number }
+function getBackgroundPosition(
+  x: number,
+  y: number,
+  inlineCenter: number,
+  blockCenter: number,
 ) {
+  let translateX = Math.abs(inlineCenter - x);
+  let translateY = Math.abs(blockCenter - y);
 
-  return <div className="absolute" style={{
-    width: props.width,
-    height: props.height,
-    top: props.y,
-    left: props.x,
-  }}>
-    <Image src="/background.png" style={{
+  if (y < blockCenter) {
+    translateY *= -1;
+  }
 
-      width: 1920,
-      height: 1080,
-      objectPosition: `-${props.x}px -${props.y}px`
-    }} className="object-cover" {...props} alt="" />
-  </div>
+  if (x < inlineCenter) {
+    translateX *= -1;
+  }
+  return { translateX, translateY };
 }
 
-export function LandingPage() {
+export function BackgroundElement(props: {
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+}) {
+  const position = getBackgroundPosition(props.x, props.y, 1920 / 2, 1080 / 2);
   return (
-    // <div className="">
-    <div>
-      <BackgroundElement {...bgParams.landing} />
-      <BackgroundElement {...bgParams.calendar} />
-
-      {/* Izquierda */}
-      {/* <div className="flex flex-col col-start-1 row-start-3 -row-end-1 justify-start mx-auto items-start"> */}
-      {/* <Image
-          src="/wireframes/landing.jpg"
-          width={500}
-          height={412}
-          aria-hidden
-          alt=""
-          preload
-        />
-        <h1 className="text-9xl font-sans-display row-start-2 col-start-1">
-          <div>Frontend</div> 
-          <div>Developer</div>
-        </h1>
-      </div> */}
-
-      {/* Arriba derecha */}
-      {/* <div className="flex col-start-2 row-start-1 gap-4 justify-start items-start">
-        <div className="flex flex-col gap-4 justify-start items-start">
-          <Image
-            src="/wireframes/select.jpg"
-            width={280}
-            height={61}
-            aria-hidden
-            alt=""
-          />
-          <Image
-            src="/wireframes/modal.jpg"
-            width={381}
-            height={160}
-            aria-hidden
-            alt=""
-          />
-        </div>
-        <Image
-          src="/wireframes/radio-group.jpg"
-          width={274}
-          height={225}
-          aria-hidden
-          alt=""
-        />
-      </div> */}
-
-      {/* Abajo derecha */}
-      {/* <div className="flex gap-4 col-start-2 row-start-2 justify-start items-start self-start">
-        <Image
-          src="/wireframes/buttons.jpg"
-          width={157}
-          height={197}
-          aria-hidden
-          alt=""
-        />
-        <div className="flex flex-col gap-4 justify-start">
-          <Image
-            src="/wireframes/icons.jpg"
-            width={268}
-            height={53}
-            aria-hidden
-            alt=""
-          />
-
-          <Image
-            src="/wireframes/chat.png"
-            width={268}
-            height={243}
-            aria-hidden
-            alt=""
-          />
-        </div>
-        <Image
-          src="/wireframes/card.png"
-          width={236}
-          height={286}
-          aria-hidden
-          alt=""
-        />*/}
-      {/* </div> */}
+    <div
+      className="absolute inset-1/2"
+      style={{
+        width: props.width,
+        height: props.height,
+        translate: `${position.translateX}px ${position.translateY}px`,
+      }}
+    >
+      <Image
+        src="/background.png"
+        unoptimized={true}
+        loading="eager"
+        style={{
+          objectPosition: `-${props.x}px -${props.y}px`,
+        }}
+        className="object-none w-full h-full"
+        width={props.width}
+        height={props.height}
+        alt=""
+      />
     </div>
   );
 }
@@ -124,13 +68,13 @@ function AboutMe() {
         <h2 className="font-sans-display text-6xl">About me</h2>
         <div className="flex flex-col gap-4">
           <p>
-            Hi! My name is Tomas, I’m a JavaScript Developer focused on making
-            {" "}<Bold>amazing user experiences</Bold> and
-            {" "}<Bold>pixel-perfect</Bold> designs implementations.
+            Hi! My name is Tomas, I’m a JavaScript Developer focused on making{" "}
+            <Bold>amazing user experiences</Bold> and <Bold>pixel-perfect</Bold>{" "}
+            designs implementations.
           </p>
           <p>
-            Mainly building with <Bold>React</Bold> stack and
-            {" "}<Bold>Next.JS</Bold>.
+            Mainly building with <Bold>React</Bold> stack and{" "}
+            <Bold>Next.JS</Bold>.
           </p>
         </div>
       </div>
@@ -138,17 +82,52 @@ function AboutMe() {
         <div className="relative w-fit">
           <svg className="h-full w-full absolute inset-0 overflow-visible">
             <g className="stroke-1 stroke-neutral-200">
-              <line vectorEffect="non-scaling-stroke" x1="0%" x2="0%" y1="calc(0% - 20px)" y2="calc(100% + 20px)"></line>
-              <line vectorEffect="non-scaling-stroke" x1="100%" x2="100%" y1="calc(0% - 20px)" y2="calc(100% + 20px)"></line>
-              <line vectorEffect="non-scaling-stroke" x1="calc(0% - 20px)" x2="calc(100% + 20px)" y1="0%" y2="0%"></line>
-              <line vectorEffect="non-scaling-stroke" x1="calc(0% - 20px)" x2="calc(100% + 20px)" y1="100%" y2="100%"></line>
+              <line
+                vectorEffect="non-scaling-stroke"
+                x1="0%"
+                x2="0%"
+                y1="calc(0% - 20px)"
+                y2="calc(100% + 20px)"
+              ></line>
+              <line
+                vectorEffect="non-scaling-stroke"
+                x1="100%"
+                x2="100%"
+                y1="calc(0% - 20px)"
+                y2="calc(100% + 20px)"
+              ></line>
+              <line
+                vectorEffect="non-scaling-stroke"
+                x1="calc(0% - 20px)"
+                x2="calc(100% + 20px)"
+                y1="0%"
+                y2="0%"
+              ></line>
+              <line
+                vectorEffect="non-scaling-stroke"
+                x1="calc(0% - 20px)"
+                x2="calc(100% + 20px)"
+                y1="100%"
+                y2="100%"
+              ></line>
             </g>
 
             <g className="stroke-1 stroke-neutral-200">
-              <line vectorEffect="non-scaling-stroke" x1="0%" x2="100%" y1="0%" y2="100%"></line>
-              <line vectorEffect="non-scaling-stroke" x1="100%" x2="0%" y1="0%" y2="100%"></line>
+              <line
+                vectorEffect="non-scaling-stroke"
+                x1="0%"
+                x2="100%"
+                y1="0%"
+                y2="100%"
+              ></line>
+              <line
+                vectorEffect="non-scaling-stroke"
+                x1="100%"
+                x2="0%"
+                y1="0%"
+                y2="100%"
+              ></line>
             </g>
-
           </svg>
           <Image
             src="/profile.jpg"
@@ -171,7 +150,7 @@ function ProjectCard(props: {
   description: string;
   githubLink: string;
   demoLink: string;
-  note?: React.ReactNode
+  note?: React.ReactNode;
 }) {
   return (
     <div className="flex sticky top-(--project-gap-top) items-start justify-center w-[70%] max-h-250 h-(--project-height) border border-neutral-400 bg-white">
@@ -205,9 +184,7 @@ function ProjectCard(props: {
             rel="noopener noreferrer"
           >
             Go to demo
-            <ArrowSquareOutIcon
-              size={16}
-            />
+            <ArrowSquareOutIcon size={16} />
           </a>
         </div>
       </div>
@@ -222,9 +199,7 @@ function Projects() {
         <h2 className="font-sans-display text-6xl">Projects</h2>
       </div>
 
-      <div className="flex flex-col w-full items-center gap-80 p-8 min-h-0 justify-start bg-[#ffffff] bg-[linear-gradient(to_right,#d9d9d9_1px,transparent_1px),linear-gradient(to_bottom,#c0c0c0_1px,transparent_1px)] bg-size-[24px_24px] relative font-sans bg-position-[0px_12px]"
-      >
-        {/* TODO: Check width on bigger viewport */}
+      <div className="flex flex-col w-full h-full items-center gap-80 p-8 min-h-0 justify-start bg-[#ffffff] bg-[linear-gradient(to_right,#d9d9d9_1px,transparent_1px),linear-gradient(to_bottom,#c0c0c0_1px,transparent_1px)] bg-size-[24px_24px] relative font-sans bg-position-[0px_12px]">
         <ProjectCard
           imgSrc="/blommy.webp"
           imgWidth={1200}
@@ -242,7 +217,12 @@ function Projects() {
           description="A finance app where you can register your spends, incomes and savings"
           githubLink="https://github.com/blommy"
           demoLink="https://tb-county.vercel.app/"
-          note={<p className="italic text-sm">You can try it with <Bold>testdemo@gmail.com</Bold> as username and <Bold>testdemo</Bold> as password</p>}
+          note={
+            <p className="italic text-sm">
+              You can try it with <Bold>testdemo@gmail.com</Bold> as username
+              and <Bold>testdemo</Bold> as password
+            </p>
+          }
         />
         <ProjectCard
           imgSrc="/meli-challenge.png"
@@ -260,22 +240,46 @@ function Projects() {
 
 function Contact() {
   return (
-    <>
+    <div className="relative h-full flex items-center">
       <div className="p-12 w-120 relative ml-8">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <h3 className="text-6xl font-sans-display">Contact</h3>
-            <p className="text-pretty">I&apos;m always ready to listen to any proposal. If you think I can fit in any project you have in mind, don&apos;t hesitate to contact me.</p>
+            <p className="text-pretty">
+              I&apos;m always ready to listen to any proposal. If you think I
+              can fit in any project you have in mind, don&apos;t hesitate to
+              contact me.
+            </p>
           </div>
           <div className="flex gap-4">
-            <a className="hover:scale-110 transition-transform" href="mailto:tomas.birbe@gmail.com"><EnvelopeSimpleIcon size={32} /></a>
-            <a className="hover:scale-110 transition-transform" href="https://www.linkedin.com/in/tomas-birbe/"><LinkedinLogoIcon size={32} /></a>
-            <a className="hover:scale-110 transition-transform" href="https://github.com/tomasbirbe"><GithubLogoIcon size={32} /></a>
+            <a
+              className="hover:scale-110 transition-transform"
+              href="mailto:tomas.birbe@gmail.com"
+            >
+              <EnvelopeSimpleIcon size={32} />
+            </a>
+            <a
+              className="hover:scale-110 transition-transform"
+              href="https://www.linkedin.com/in/tomas-birbe/"
+            >
+              <LinkedinLogoIcon size={32} />
+            </a>
+            <a
+              className="hover:scale-110 transition-transform"
+              href="https://github.com/tomasbirbe"
+            >
+              <GithubLogoIcon size={32} />
+            </a>
           </div>
         </div>
         <svg className="w-full h-full absolute inset-0 pointer-events-none z-10 overflow-visible">
           <g className="stroke-1 stroke-neutral-300">
-            <line x1="0%" x2="100%" y1="calc(100% - 24px)" y2="calc(100% - 24px)"></line>
+            <line
+              x1="0%"
+              x2="100%"
+              y1="calc(100% - 24px)"
+              y2="calc(100% - 24px)"
+            ></line>
             <line x1="100%" x2="100%" y1="100%" y2="calc(100% - 48px)"></line>
           </g>
           <g className="stroke-1 stroke-neutral-300">
@@ -285,30 +289,129 @@ function Contact() {
         </svg>
       </div>
       <svg className="absolute right-0 top-0 w-1/2 h-full">
-        <line x2="0" x1="100%" y1="0" y2="100%" className="stroke-neutral-200" vectorEffect="non-scaling-stroke" />
-        <line x1="25%" y1="75%" x2="50%" y2="100%" className="stroke-neutral-200" vectorEffect="non-scaling-stroke" />
-        <line x1="75%" y1="25%" x2="50%" y2="0%" className="stroke-neutral-200" vectorEffect="non-scaling-stroke" />
+        <line
+          x2="0"
+          x1="100%"
+          y1="0"
+          y2="100%"
+          className="stroke-neutral-200"
+          vectorEffect="non-scaling-stroke"
+        />
+        <line
+          x1="25%"
+          y1="75%"
+          x2="50%"
+          y2="100%"
+          className="stroke-neutral-200"
+          vectorEffect="non-scaling-stroke"
+        />
+        <line
+          x1="75%"
+          y1="25%"
+          x2="50%"
+          y2="0%"
+          className="stroke-neutral-200"
+          vectorEffect="non-scaling-stroke"
+        />
       </svg>
-    </>
+    </div>
+  );
+}
+
+function CoordinatedFadeIn({
+  children,
+  baseDelayInMS = 700,
+  order,
+}: {
+  children: React.ReactNode;
+  order: number;
+  baseDelayInMS?: number;
+}) {
+  return (
+    <div
+      style={{ transitionDelay: `${baseDelayInMS * order}ms` }}
+      className="starting:opacity-0 opacity-100 transition-opacity duration-1200"
+    >
+      {children}
+    </div>
   );
 }
 
 export default function Page() {
   return (
-    // TODO: test to remove overflow
-    <div className="overflow-auto h-full px-(--frame-width) relative py-(--frame-height) ">
-      <div className="flex w-full border-b border-neutral-200 h-full overflow-hidden items-end min-h-0 justify-start bg-[#ffffff] bg-[radial-gradient(#d9d9d9_1px,transparent_1px)] bg-size-[16px_16px] font-sans">
-        <LandingPage />
+    <>
+      <div className="h-full grid place-items-center bg-[#ffffff] bg-[radial-gradient(#d9d9d9_1px,transparent_1px)] bg-size-[16px_16px] border-b border-neutral-200 relative overflow-hidden">
+        <CoordinatedFadeIn order={2}>
+          <BackgroundElement {...bgParams.chat} />
+          <BackgroundElement {...bgParams.toggleAndPopover} />
+          <BackgroundElement {...bgParams.chips} />
+          <BackgroundElement {...bgParams.card} />
+          <BackgroundElement {...bgParams.alert} />
+        </CoordinatedFadeIn>
+        <CoordinatedFadeIn order={3}>
+          <BackgroundElement {...bgParams.calendar} />
+          <BackgroundElement {...bgParams.contextMenu} />
+          <BackgroundElement {...bgParams.buttons} />
+          <BackgroundElement {...bgParams.radioButtons} />
+        </CoordinatedFadeIn>
+        <CoordinatedFadeIn order={4}>
+          <BackgroundElement {...bgParams.paginateButtons} />
+          <BackgroundElement {...bgParams.chart} />
+          <BackgroundElement {...bgParams.skeleton} />
+          <BackgroundElement {...bgParams.landing} />
+        </CoordinatedFadeIn>
+        <CoordinatedFadeIn order={5}>
+          <BackgroundElement {...bgParams.font} />
+          <BackgroundElement {...bgParams.icons} />
+          <BackgroundElement {...bgParams.select} />
+          <BackgroundElement {...bgParams.breadcrumbs} />
+        </CoordinatedFadeIn>
+        <div className="starting:bg-transparent bg-white px-6 py-4 absolute starting:opacity-0 opacity-100 transition-[opacity,background] duration-1000">
+          <CoordinatedFadeIn order={0}>
+            <p className="text-8xl font-sans-display text-center text-black">
+              Tomas Birbe
+            </p>
+          </CoordinatedFadeIn>
+          <CoordinatedFadeIn order={1}>
+            <p className="text-4xl font-sans-display text-center text-neutral-600">
+              Frontend Developer
+            </p>
+          </CoordinatedFadeIn>
+        </div>
       </div>
-      <div className="flex isolate border-b border-neutral-200 w-full h-full min-h-0 relative">
+      <div className="h-full border-b border-neutral-200">
         <AboutMe />
       </div>
-      <div className="flex isolate border-b border-neutral-200 w-full min-h-0 relative">
+      <div>
         <Projects />
       </div>
-      <div className="flex w-full border-b border-neutral-200 items-center h-full min-h-0 relative">
+      <div className="h-full">
         <Contact />
       </div>
-    </div>
+    </>
   );
 }
+
+// export default function Page() {
+//   return (
+//     // TODO: test to remove overflow
+//     <div className="px-(--frame-width) h-full py-(--frame-height)">
+//     {/* <div className="px-(--frame-width) relative py-(--frame-height) "> */}
+//       <div className="">
+//         <LandingPage />
+//       </div>
+//       <div className="flex h-screen w-screen border-b border-neutral-200 items-end min-h-0 justify-start bg-[#ffffff] bg-[radial-gradient(#d9d9d9_1px,transparent_1px)] bg-size-[16px_16px] font-sans">
+//         <LandingPage />
+//       </div>
+//       <div className="flex isolate border-b border-neutral-200 w-screen h-screen min-h-0 relative">
+//         <AboutMe />
+//       </div>
+//       <div className="flex isolate border-b border-neutral-200 w-screen h-screen min-h-0 relative">
+//         <Projects />
+//       </div>
+//       <div className="flex w-screen border-b border-neutral-200 items-center h-screen min-h-0 relative">
+//         <Contact />
+//       </div>
+//     </div>
+//   );
+// }
