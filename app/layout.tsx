@@ -3,7 +3,7 @@ import { Geist, Inter } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
 import { BackgroundElement } from "./page";
-import bgParams from './background.json'
+import bgParams from "./background.json";
 
 const bebasNeue = localFont({
   src: "../public/bebas_neue.ttf",
@@ -30,24 +30,22 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${interSans.variable} ${bebasNeue.variable} antialiased h-full`}
+      className={`${geistSans.variable} ${interSans.variable} ${bebasNeue.variable} bg-background antialiased h-full`}
     >
-      <body className="relative h-screen py-(--frame-height) px-(--frame-width)">
-        <div className="overflow-auto h-full">
+      <body className="relative h-screen grid place-items-center">
+        {/* <div className="overflow-auto h-full py-(--frame-height) px-(--frame-width)"> */}
+        <div className="overflow-auto scrollbar-track-background scrollbar-thumb-neutral-200 dark:scrollbar-thumb-neutral-800 scrollbar-thin h-[calc(100%-var(--frame-height)*2)] w-[calc(100%-var(--frame-width)*2)]">
           {children}
         </div>
-        <div className="z-10 bg-white w-(--frame-width) fixed left-0 top-0 bottom-0"></div>
-        <div className="z-10 bg-white w-(--frame-width) fixed right-0 top-0 bottom-0"></div>
-        <div className="z-10 bg-white h-(--frame-height) fixed left-0 top-0 right-0"></div>
-        <div className="z-10 bg-white h-(--frame-height) fixed left-0 bottom-0 right-0"></div>
-        <div className="z-10 bg-neutral-200 w-px fixed left-(--frame-width) top-0 bottom-0"></div>
-        <div className="z-10 bg-neutral-200 w-px fixed right-(--frame-width) top-0 bottom-0"></div>
-        <div className="z-10 bg-neutral-200 h-px fixed left-0 right-0 top-(--frame-height)"></div>
-        <div className="z-10 bg-neutral-200 h-px fixed left-0 right-0 bottom-(--frame-height)"></div>
+        {/* <div className="z-10 bg-background w-(--frame-width) fixed left-0 top-0 bottom-0"></div>
+        <div className="z-10 bg-background w-(--frame-width) fixed right-0 top-0 bottom-0"></div>
+        <div className="z-10 bg-background h-(--frame-height) fixed left-0 top-0 right-0"></div>
+        <div className="z-10 bg-background h-(--frame-height) fixed left-0 bottom-0 right-0"></div> */}
+        <div className="z-10 bg-drawing w-px fixed left-(--frame-width) top-0 bottom-0"></div>
+        <div className="z-10 bg-drawing w-px fixed right-(--frame-width) top-0 bottom-0"></div>
+        <div className="z-10 bg-drawing h-px fixed left-0 right-0 top-(--frame-height)"></div>
+        <div className="z-10 bg-drawing h-px fixed left-0 right-0 bottom-(--frame-height)"></div>
         {/* </div> */}
-
-
-
       </body>
     </html>
   );

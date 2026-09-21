@@ -9,23 +9,36 @@
   --project-gap-top: --spacing(35);
   --project-height: calc(100dvh - var(--frame-height) - (var(--projects-section-height) + var(--project-gap-top)));
 
-  --foreground: var(--color-neutral-800);
-  --foreground-display: var(--color-black);
 
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-display: var(--foreground-display);
+  --color-drawing: var(--drawing);
+  --color-dots: var(--dots);
+  --color-grid: var(--grid);
+}
 
-  --animate-fade-in: fade-in ease-out;
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --foreground-muted: #171717;
+  --foreground-display: #171717;
+  --drawing: var(--color-neutral-200);
+  --dots: var(--color-neutral-300);
+  --grid: var(--color-neutral-200);
+}
 
-  @keyframes fade-in {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 100%;
-    }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--color-neutral-950);
+    --foreground: var(--color-neutral-400);
+    --foreground-muted: var(--color-neutral-600);
+    --foreground-display: var(--color-neutral-200);
+    --drawing: var(--color-neutral-800);
+    --dots: var(--color-neutral-800);
+    --grid: var(--color-neutral-800);
   }
-
-
 }
 
 /* :root {
@@ -47,7 +60,62 @@
   }
 }
 */
+/* 
+:root {
+  --spring-easing: linear(
+    0,
+    0.009,
+    0.035 2.1%,
+    0.141,
+    0.281 6.7%,
+    0.723 12.9%,
+    0.938 16.7%,
+    1.017,
+    1.077,
+    1.121,
+    1.149 24.3%,
+    1.159,
+    1.163,
+    1.161,
+    1.154 29.9%,
+    1.129 32.8%,
+    1.051 39.6%,
+    1.017 43.1%,
+    0.991,
+    0.977 51%,
+    0.974 53.8%,
+    0.975 57.1%,
+    0.997 69.8%,
+    1.003 76.9%,
+    1.004 83.8%,
+    1
+  );
+  --spring-duration: 1.333s;
+}
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    translate: 0 40px;
+  }
+  ,
+  50% {
+    opacity: 0;
+  }
+  ,
+  to {
+    opacity: 1;
+    translate: 0;
+  }
+}
+
+@utility reveal {
+  animation: fadeIn backwards;
+  animation-timing-function: var(--spring-easing);
+  animation-timeline: view(20%);
+  animation-range-start: cover 20%;
+  animation-range-end: cover 40%;
+} */
 
 body {
   color: var(--foreground);
