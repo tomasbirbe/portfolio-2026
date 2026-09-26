@@ -10,6 +10,13 @@
   --project-height: calc(100dvh - var(--frame-height) - (var(--projects-section-height) + var(--project-gap-top)));
 
 
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  /* strong ease-out for UI */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  /* strong ease-in-out for on-screen movement */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  /* iOS-like drawer curve (Ionic) */
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
@@ -38,6 +45,20 @@
     --drawing: var(--color-neutral-800);
     --dots: var(--color-neutral-800);
     --grid: var(--color-neutral-800);
+  }
+}
+
+@utility reveal {
+  opacity: 1;
+  filter: none;
+  transition: opacity, filter;
+  transition-duration: 500ms;
+  transition-timing-function: var(--ease-out);
+  transition-delay: calc(attr(data-order type(<number>), (sibling-index() - 1)) * 700ms);
+
+  @starting-style {
+    opacity: 0;
+    filter: blur(0.05em);
   }
 }
 
