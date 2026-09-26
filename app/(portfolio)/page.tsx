@@ -10,11 +10,11 @@ export default function Page() {
     <>
       <div className="h-full grid place-items-center bg-[radial-gradient(var(--color-dots)_1px,transparent_1px)] bg-size-[16px_16px] border-b border-drawing relative overflow-hidden">
         <div className="flex flex-col gap-5">
-          <p className="[text-box:trim-both_cap_alphabetic] reveal">Hello, I&apos;m</p>
-            <p className="text-8xl reveal [text-box:trim-both_cap_alphabetic] font-sans-display text-center text-foreground-display">
+          <p className="[text-box:trim-both_cap_alphabetic] reveal" data-order={0}>Hello, I&apos;m</p>
+            <p className="text-8xl reveal [text-box:trim-both_cap_alphabetic] font-sans-display text-center text-foreground-display" data-order={1}>
               Tomas Birbe
             </p>
-            <p className="text-4xl [text-box:trim-both_cap_alphabetic] reveal font-sans-display text-foreground-muted">
+            <p className="text-4xl [text-box:trim-both_cap_alphabetic] reveal font-sans-display text-foreground-muted" data-order={2}>
               Frontend Developer
             </p>
         </div>

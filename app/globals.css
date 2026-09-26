@@ -52,9 +52,9 @@
   opacity: 1;
   filter: none;
   transition: opacity, filter;
-  transition-duration: 500ms;
+  transition-duration: 700ms;
   transition-timing-function: var(--ease-out);
-  transition-delay: calc(attr(data-order type(<number>), (sibling-index() - 1)) * 700ms);
+  transition-delay: calc(attr(data-order type(<number>), (sibling-index() - 1)) * 500ms);
 
   @starting-style {
     opacity: 0;
