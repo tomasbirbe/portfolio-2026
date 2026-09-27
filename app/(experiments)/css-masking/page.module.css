@@ -1,0 +1,25 @@
+.scroller {
+  container-type: size;
+  scroll-timeline: --scroller block;
+}
+
+/* The mask lives on the content (not the scroller) so the scrollbar isn't masked.
+   It's one viewport tall and slides down as you scroll, so it stays pinned to the visible area. */
+.content {
+  mask-image: linear-gradient(to bottom, black 90%, transparent);
+  mask-size: 100% 100cqh;
+  mask-repeat: no-repeat;
+  animation: mask-follow var(--ease-out) both;
+  animation-timeline: --scroller;
+}
+
+@keyframes mask-follow {
+  from { mask-position: 0 0; }
+  to { mask-position: 0 100%; }
+}
+
+/* Without scroll-driven animations, fall back to masking the scroller (scrollbar fades too) */
+@supports not (animation-timeline: scroll()) {
+  .scroller { mask-image: linear-gradient(to bottom, black 90%, transparent); }
+  .content { mask-image: none; animation: none; }
+}
